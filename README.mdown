@@ -74,8 +74,3 @@ This gem isn't completed yet, I planned to include the following in the next rel
 * Startup applications on an external system(via SSH)
 * Start applications from another place than your applications root
 * ~~Clean up some code so it is good enough to it release on Github~~
-
-## Licence
-
-The gem is free to use, but may only be distributed by Bram Vandenbogaerde on RubyGems.
-The licence could change in the future if the project is hosted on Github.
