@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+
+require 'thinappserver'
+require 'optitron'
+require 'pp'
+
+
+$appserver = ThinAppServer.new("config.json")
+
+class Runner < Optitron::CLI
+	#class_opt "verbose", "Print what the script is doing, default is on" ,:default => true
+
+
+	desc "Start all applications in config.json or an individual application by name"
+	def start(server = "all")
+		$appserver.startServers(server)
+	end
+
+	desc "Stop all applications in config.json or an individual application by name"
+	def stop(server = "all")
+		$appserver.kill(server)
+	end
+
+	desc "Kill an application by application name"
+	def kill(servername)
+		$appserver.killone(servername)
+	end
+
+	desc "Get the status of the applications"
+	def status
+		$appserver.status
+	end
+end
+
+Runner.dispatch
