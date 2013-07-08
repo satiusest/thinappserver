@@ -1,0 +1,83 @@
+# Thin App Server
+
+Thin App Server is designed to start thin based applications very easily.    
+You can compare this with things like Glassfish but for ruby and thin.
+
+I created this because I had several tiny Sinatra application on diffrent places on my server an my development machine.    
+It was always a pain to start an applications on my local machine because I had to find my application code and start the server with something like "thin -p 8888 -d".
+
+With this gem I'm able to start several applications at once with one single command "thinapp start".
+
+## Pre-requirements
+
+* Thin itself ([sudo] gem install thin)
+* Ruby and RubyGems
+
+## Installation
+
+The installation is very simple just run the following command on the command line:
+
+    [sudo] gem install thinappserver
+
+## Configuration
+
+Every app must be a directory and the parent directory is the folder that only holds application.
+Your Thin App Server tree should look like this:
+
+	-- thinappserver
+	    -- config.json
+	    -- myapp
+	        -- config.json
+
+Like you see you have two different "config.json" files, the first config file is the most important one, it defines what application to start and what their names are:
+
+    {  
+    	"servers": [
+    		{
+    			"name": "myapp",
+    			"type": "internal"
+    		}
+    	]
+    }
+
+"servers" must be always an array with the keys "name" and "type", name specifies the name of the application, it must be equal to the folder name where the application is stored, "type" is either "internal" and "external", currently only "internal" is supported.
+
+Then we also have the config file in our application directory, it must contain the following:
+
+    {  
+    	"port": "8888"
+    }
+
+"port" specifies the port where the applications must be accessible from, it can be any port that is available to your server.
+
+After you've configured everthing you can go to your applications root (in this case "thinappserver") and start the application with:
+
+    thinapp start
+
+If you want to start more applications just extend the array of servers and create the directories and configuration files accordingly.
+
+## Command line usage
+
+The command line executable is very easy to use, there are several commands available:
+
+    thinapp start  # Starts every application in your config.json file
+    thinapp stop   # Stops every application in your config.json file
+    thinapp status # Prints the status of your applications in your config.json file
+    thinapp kill   # !DEPRECATED! stop an invididual application (will be removed in future release)
+
+You can type an application name after start or stop if you want to start or stop an application individually.
+
+## TODO
+
+This gem isn't completed yet, I planned to include the following in the next releases:
+
+* Startup applications on an external system(via SSH)
+* Start applications from another place than your applications root
+* Clean up some code so it is good enough to it release on Github
+
+If there's a bug feel free to contact me at [@bramvdbogaerde](https://twitter.com/bramvdbogaerde) on Twitter.
+
+## Licence
+
+The gem is free to use, but may only be distributed by Bram Vandenbogaerde on RubyGems.
+The licence could change in the future if the project is hosted on Github.
