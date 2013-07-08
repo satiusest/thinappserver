@@ -73,7 +73,7 @@ This gem isn't completed yet, I planned to include the following in the next rel
 
 * Startup applications on an external system(via SSH)
 * Start applications from another place than your applications root
-* ~~Clean up some code so it is good enough to it release on Github~
+* ~~Clean up some code so it is good enough to it release on Github~~
 
 If there's a bug feel free to contact me at [@bramvdbogaerde](https://twitter.com/bramvdbogaerde) on Twitter.
 
