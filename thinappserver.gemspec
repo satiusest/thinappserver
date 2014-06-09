@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.executables   = ["thinapp"]
 
   s.homepage    = 'http://bramvdb.com/gems/thinappserver/'
-  s.requirements << 'Sinatra gem must be installed and thin command must be available(with rack adapater)'
+  s.requirements << 'Only Rack and thin is needed'
   s.add_dependency("json","~> 1.5.0")
   s.add_dependency("optitron","~> 0.3.0")
 end
