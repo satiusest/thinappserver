@@ -1,4 +1,5 @@
 require 'json'
+require 'uri'
 
 class ThinAppServer
   def initialize(config)
@@ -14,17 +15,26 @@ class ThinAppServer
       return;
     end
     @servers.each do |server|
-      server = server["name"]
+      servername = server["name"]
       type = server["type"]
 
       if(type == "external")
+        puts "We are making this right now, external systems don't work yet"
+        remote = server["remote"]
+        parsed = URI.parse(remote);
+
+        case parse.scheme
+        when "ssh"
+            `ssh #{parsed.user}@#{parsed.host}:#{parsed.path} cd .. && thinapp start #{servername}`
+        end
         return;
       end
-      settings = File.read(server+"/config.json")
+
+      settings = File.read(servername+"/config.json")
       props = JSON.parse(settings)
-      log "Starting server: "+server+" ..."
-      if(!File.exists? server+"/"+server+".running")
-        system("cd "+server+" && thin start -p"+props["port"]+" -d -P "+server+".running")
+      log "Starting server: "+servername+" ..."
+      if(!File.exists? server+"/"+servername+".running")
+        system("cd "+servername+" && thin start -p"+props["port"]+" -d -P "+servername+".running")
       end
     end
   end
@@ -63,7 +73,7 @@ class ThinAppServer
     if(@verbose)
       puts msg
     end
-  end 
+  end
 
   def status
     puts "##### NOTE #### Server status is not working for external applications right now ##### NOTE #######"
@@ -84,4 +94,3 @@ class ThinAppServer
     end
   end
 end
-
