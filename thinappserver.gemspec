@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.summary     = "Thin Application Server"
   s.description = "...."
   s.authors     = ["Bram Vandenbogaerde"]
-  s.email       = 'bram@comicsblog.be'
+  s.email       = 'contact@bramvdb.com'
   s.files       = ["lib/thinappserver.rb"]
   s.bindir = 'bin'
   s.executables   = ["thinapp"]
