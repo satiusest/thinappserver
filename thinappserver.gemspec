@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = 'thinappserver'
-  s.version     = '0.0.4'
-  s.date        = '2013-06-03'
+  s.version     = '0.0.5'
+  s.date        = '2014-07-09'
   s.summary     = "Thin Application Server"
   s.description = "...."
   s.authors     = ["Bram Vandenbogaerde"]
